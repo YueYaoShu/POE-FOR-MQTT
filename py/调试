@@ -1,0 +1,12 @@
+mosquitto -v
+mosquitto_pub -t /datapoint  -m "{\"device_key\":\"1061000001ABCDEF\",\"datapoint\":[{\"st\":101,\"sn\":101,\"sv\":40},{\"st\":101,\"sn\":102,\"sv\":25}]}"
+
+mosquitto_pub -t /datapoint  -m "{\"device_key\":\"1061000001ABCDEF\",\"datapoint\":[{\"st\":111,\"sn\":101,\"sv\":1}]}"
+mosquitto_pub -t /datapoint  -m "{\"device_key\":\"1061000001ABCDEF\",\"datapoint\":[{\"st\":111,\"sn\":101,\"sv\":0}]}"
+
+mosquitto_pub -t /datapoint  -m "{\"device_key\":\"1061000001ABCDEF\",\"datapoint\":[{\"st\":110,\"sn\":101,\"sv\":50}]}"
+mosquitto_pub -t /datapoint  -m "{\"device_key\":\"1061000001ABCDEF\",\"datapoint\":[{\"st\":110,\"sn\":101,\"sv\":110}]}"
+mosquitto_pub -t /datapoint  -m "{\"device_key\":\"1061000001ABCDEF\",\"datapoint\":[{\"st\":110,\"sn\":101,\"sv\":500}]}"
+
+
+mosquitto_pub -t /datapoint  -m "{\"device_key\":\"1061000001ABCDEF\",\"datapoint\":[{\"st\":109,\"sn\":101,\"sv\":1}]}"

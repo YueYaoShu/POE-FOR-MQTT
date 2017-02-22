@@ -1,0 +1,19 @@
+import datetime
+import threading
+import paho.mqtt.client as mqtt
+import json
+
+def shallDo():
+  jsonData = {"device_key":id}
+  client = mqtt.Client()
+  client.connect("127.0.0.1", 1883, 60)
+  client.publish("/timesignal", json.dumps(jsonData))
+  client.disconnect()
+now = datetime.datetime.now()
+seconds=now.second+now.minute*60+now.hour*3600
+
+if 50280<=seconds and seconds<=50400 :
+  o113102=1
+if type=="timesignal":
+  threading.Timer(5, shallDo).start()
+

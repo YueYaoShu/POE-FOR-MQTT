@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<title></title>
+		<link href="./css/bootstrap.min.css" rel="stylesheet">
+		<link href="./css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+		<link href="./css/todc-bootstrap.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="./js/html5shiv.min.js"></script>
+      <script src="./js/respond.min.js"></script>
+    <![endif]-->
+	</head>	
+<body>
+  <nav class="navbar navbar-default navbar-static-top">
+    <a class="navbar-brand">MQTT</a>
+    <div class="pull-right">
+      <a href="#" class="navbar-brand"><small></small></a>
+      &nbsp;
+    </div>
+  </nav>
+  <div class="container-fluid">
+    <div class="input-group">
+      <input type="text" class="form-control" id="poeid" placeholder="POE ID...">
+      <span class="input-group-btn">
+        <button class="btn btn-primary" type="button" onclick="javascript:showScript();">查询</button>
+      </span>
+    </div>    
+    <br/>  
+    
+    <div class="input-group">
+      <span class="input-group-addon">模式</span>
+      <select class="form-control" id="poemode" >
+        <option>开关</option>
+        <option>亮度</option>
+        <option>体感</option>
+        <option>定时</option>
+        </select>
+    </div>
+    <div class="input-group">    
+      <span class="input-group-addon">代码</span>    
+      <textarea class="form-control" rows="10" id="poetext"></textarea>        
+    </div>          
+    <button type="button" class="btn btn-primary pull-right" onclick="javascript:updateScript();">保存</button>
+  </div>
+  <script src="./js/jquery-1.12.4.min.js"></script>    
+  <script src="./js/bootstrap.min.js"></script>
+  <script src="./js/ie10-viewport-bug-workaround.js"></script>
+  <script>
+  function showScript() {
+  	$.ajax({  
+  	    url:"/cgi-bin/select_script.py",  
+  	    type:"POST",  
+  	    contentType: "application/json", 
+  	    dataType: 'json',  
+  	    data: JSON.stringify({ "poeid": $("#poeid").val(), "poemode": $("#poemode").prop("selectedIndex")+1}),
+        success:function(data) {  
+          $("#poeid").val(data['poeid'])          
+          $("#poemode").prop('selectedIndex',data['poemode']-1);
+          $("#poetext").val(data['poetext']);
+        },  
+        error:function() {  
+          $("#poetext").val("");
+        }
+    }); 
+  }
+  function updateScript() {
+  	$.ajax({  
+  	    url:"/cgi-bin/update_script.py",  
+  	    type:"POST",  
+  	    contentType: "application/json", 
+  	    dataType: 'json',  
+  	    data: JSON.stringify({ "poeid": $("#poeid").val(), "poemode": $("#poemode").prop("selectedIndex")+1, "poetext": $("#poetext").val() }),
+        success:function() {  
+          alert('success');
+        },
+        error:function(data) {  
+          alert('error');
+        } 
+    }); 
+  }  
+  </script>  
+</body>
+</html>

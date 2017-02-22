@@ -1,0 +1,225 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<title></title>
+		<link href="./css/bootstrap.min.css" rel="stylesheet">
+		<link href="./css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+		<link href="./css/todc-bootstrap.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="./js/html5shiv.min.js"></script>
+      <script src="./js/respond.min.js"></script>
+    <![endif]-->
+	</head>	
+<body>
+  <nav class="navbar navbar-default navbar-static-top">
+    <a class="navbar-brand">MQTT</a>
+    <div class="pull-right">
+      <a href="#" class="navbar-brand"><small></small></a>
+      &nbsp;
+    </div>
+  </nav>
+  <div class="container-fluid">
+    <div class="input-group">
+      <input type="text" class="form-control" id="poeid" placeholder="POE ID...">
+      <span class="input-group-btn">
+        <button class="btn btn-primary" type="button" onclick="javascript:showState();">查询</button>
+      </span>
+    </div>    
+    <br/>  
+    
+    <div class="input-group">
+      <span class="input-group-addon">Mode</span>
+      <input type="text" class="form-control" id="Mode">
+      <span class="input-group-addon">Stamp</span>
+      <input type="text" class="form-control" id="Stamp">      
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon">113101</span>
+      <input type="text" class="form-control" id="V113101">
+      <span class="input-group-addon">113102</span>
+      <input type="text" class="form-control" id="V113102">
+      <span class="input-group-addon">113103</span>
+      <input type="text" class="form-control" id="V113103">
+      <span class="input-group-addon">113104</span>
+      <input type="text" class="form-control" id="V113104">
+      <span class="input-group-addon">113105</span>
+      <input type="text" class="form-control" id="V113105">
+      <span class="input-group-addon">113106</span>
+      <input type="text" class="form-control" id="V113106">
+      <span class="input-group-addon">113107</span>
+      <input type="text" class="form-control" id="V113107">
+      <span class="input-group-addon">113108</span>
+      <input type="text" class="form-control" id="V113108">
+    </div>     
+    <div class="input-group">
+      <span class="input-group-addon">115101</span>
+      <input type="text" class="form-control" id="V115101">
+      <span class="input-group-addon">115102</span>
+      <input type="text" class="form-control" id="V115102">
+      <span class="input-group-addon">115103</span>
+      <input type="text" class="form-control" id="V115103">
+      <span class="input-group-addon">115104</span>
+      <input type="text" class="form-control" id="V115104">
+      <span class="input-group-addon">115105</span>
+      <input type="text" class="form-control" id="V115105">
+      <span class="input-group-addon">115106</span>
+      <input type="text" class="form-control" id="V115106">
+      <span class="input-group-addon">115107</span>
+      <input type="text" class="form-control" id="V115107">
+      <span class="input-group-addon">115108</span>
+      <input type="text" class="form-control" id="V115108">
+    </div>        
+    <div class="input-group">
+      <span class="input-group-addon">111101</span>
+      <input type="text" class="form-control" id="V111101">
+      <input type="text" class="form-control" id="T111101">
+      <span class="input-group-addon">111102</span>
+      <input type="text" class="form-control" id="V111102">
+      <input type="text" class="form-control" id="T111102">
+      <span class="input-group-addon">111103</span>
+      <input type="text" class="form-control" id="V111103">
+      <input type="text" class="form-control" id="T111103">
+      <span class="input-group-addon">111104</span>
+      <input type="text" class="form-control" id="V111104">
+      <input type="text" class="form-control" id="T111104">      
+      <span class="input-group-addon">111105</span>
+      <input type="text" class="form-control" id="V111105">
+      <input type="text" class="form-control" id="T111105">
+      <span class="input-group-addon">111106</span>
+      <input type="text" class="form-control" id="V111106">
+      <input type="text" class="form-control" id="T111106">
+      <span class="input-group-addon">111107</span>
+      <input type="text" class="form-control" id="V111107">
+      <input type="text" class="form-control" id="T111107">
+      <span class="input-group-addon">111108</span>
+      <input type="text" class="form-control" id="V111108">
+      <input type="text" class="form-control" id="T111108">
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon">116101</span>
+      <input type="text" class="form-control" id="V116101">
+      <span class="input-group-addon">116102</span>
+      <input type="text" class="form-control" id="V116102">  
+    </div>        
+    <div class="input-group">
+      <span class="input-group-addon">112101</span>
+      <input type="text" class="form-control" id="V112101">
+      <input type="text" class="form-control" id="T112101">
+      <span class="input-group-addon">112102</span>
+      <input type="text" class="form-control" id="V112102">
+      <input type="text" class="form-control" id="T112102">
+      <span class="input-group-addon">112103</span>
+      <input type="text" class="form-control" id="V112103">
+      <input type="text" class="form-control" id="T112103">
+      <span class="input-group-addon">112104</span>
+      <input type="text" class="form-control" id="V112104">
+      <input type="text" class="form-control" id="T112104">
+    </div>        
+    <div class="input-group">        
+      <span class="input-group-addon">109101</span>
+      <input type="text" class="form-control" id="V109101">  
+      <input type="text" class="form-control" id="T109101">  
+    </div>  
+    <div class="input-group">        
+      <span class="input-group-addon">110101</span>
+      <input type="text" class="form-control" id="V110101">
+      <span class="input-group-addon">110102</span>
+      <input type="text" class="form-control" id="V110102">    
+      <span class="input-group-addon">101101</span>
+      <input type="text" class="form-control" id="V101101">
+      <span class="input-group-addon">101102</span>
+      <input type="text" class="form-control" id="V101102">  
+    </div>    
+    <div class="input-group">        
+      <span class="input-group-addon">108101</span>
+      <input type="text" class="form-control" id="V108101">         
+      <input type="text" class="form-control" id="T108101">                     
+    </div>      
+    <div class="input-group">
+      <span class="input-group-addon">117101</span>
+      <input type="text" class="form-control" id="V117101">        
+      <input type="text" class="form-control" id="T117101">        
+    </div>        
+  </div>
+  <script src="./js/jquery-1.12.4.min.js"></script>    
+  <script src="./js/bootstrap.min.js"></script>
+  <script src="./js/ie10-viewport-bug-workaround.js"></script>
+  <script>
+  function showState() {
+  	$.ajax({  
+  	    url:"/cgi-bin/select_state.py",  
+  	    type:"POST",  
+  	    contentType: "application/json", 
+  	    dataType: 'json',  
+  	    data: JSON.stringify({ "poeid": $("#poeid").val()}),
+        success:function(data) {  
+          $("#Mode").val(data['Mode']);
+          $("#Stamp").val(data['Stamp']);
+          $("#V113101").val(data['V113101']);
+          $("#V113102").val(data['V113102']);
+          $("#V113103").val(data['V113103']);
+          $("#V113104").val(data['V113104']);
+          $("#V113105").val(data['V113105']);
+          $("#V113106").val(data['V113106']);
+          $("#V113107").val(data['V113107']);
+          $("#V113108").val(data['V113108']);
+          $("#V115101").val(data['V115101']);
+          $("#V115102").val(data['V115102']);
+          $("#V115103").val(data['V115103']);
+          $("#V115104").val(data['V115104']);
+          $("#V115105").val(data['V115105']);
+          $("#V115106").val(data['V115106']);
+          $("#V115107").val(data['V115107']);
+          $("#V115108").val(data['V115108']);
+          $("#V111101").val(data['V111101']);
+          $("#V111102").val(data['V111102']);
+          $("#V111103").val(data['V111103']);
+          $("#V111104").val(data['V111104']);
+          $("#V111105").val(data['V111105']);
+          $("#V111106").val(data['V111106']);
+          $("#V111107").val(data['V111107']);
+          $("#V111108").val(data['V111108']);
+          $("#T111101").val(data['T111101']);
+          $("#T111102").val(data['T111102']);
+          $("#T111103").val(data['T111103']);
+          $("#T111104").val(data['T111104']);
+          $("#T111105").val(data['T111105']);
+          $("#T111106").val(data['T111106']);
+          $("#T111107").val(data['T111107']);
+          $("#T111108").val(data['T111108']);
+          $("#V116101").val(data['V116101']);
+          $("#V116102").val(data['V116102']);
+          $("#T116101").val(data['T116101']);
+          $("#T116102").val(data['T116102']);
+          $("#V112101").val(data['V112101']);
+          $("#V112102").val(data['V112102']);
+          $("#V112103").val(data['V112103']);
+          $("#V112104").val(data['V112104']);
+          $("#T112101").val(data['T112101']);
+          $("#T112102").val(data['T112102']);
+          $("#T112103").val(data['T112103']);
+          $("#T112104").val(data['T112104']);
+          $("#V109101").val(data['V109101']);
+          $("#T109101").val(data['T109101']);
+          $("#V110101").val(data['V110101']);
+          $("#V110102").val(data['V110102']);
+          $("#V101101").val(data['V101101']);
+          $("#V101102").val(data['V101102']);
+          $("#V102101").val(data['V102101']);
+          $("#V102102").val(data['V102102']);
+          $("#V108101").val(data['V108101']);
+          $("#T108101").val(data['T108101']);
+          $("#V117101").val(data['V117101']);
+          $("#T117101").val(data['T117101']);
+        },  
+        error:function() {  
+          alert("error");
+        }
+    }); 
+  }
+  </script>  
+</body>
+</html>

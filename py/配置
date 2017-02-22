@@ -1,0 +1,16 @@
+sudo apt-get install mysql-server mysql-client
+sudo apt-get install python-mysqldb
+sudo /etc/init.d/mysql stop/start/restart
+mysql -u root -p
+
+
+sudo apt-get install python-pip
+sudo pip install paho-mqtt
+
+
+sudo apt-get install apache2
+sudo apt-get install libapache2-mod-python
+
+cd /etc/apache2/mods-enabled/
+sudo ln -s ../mods-available/mod_python.load mod_python.load
+

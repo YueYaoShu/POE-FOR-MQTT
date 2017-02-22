@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<title></title>
+		<link href="./css/bootstrap.min.css" rel="stylesheet">
+		<link href="./css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+		<link href="./css/todc-bootstrap.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="./js/html5shiv.min.js"></script>
+      <script src="./js/respond.min.js"></script>
+    <![endif]-->
+	</head>	
+<body>
+  <nav class="navbar navbar-default navbar-static-top">
+    <a class="navbar-brand">MQTT</a>
+    <div class="pull-right">
+      <a href="mode1.html" class="navbar-brand"><small>Mode1</small></a>
+      <a href="mode2.html" class="navbar-brand"><small>Mode2</small></a>
+      <a href="mode3.html" class="navbar-brand"><small>Mode3</small></a>
+      <a href="mode4.html" class="navbar-brand"><small>Mode4</small></a>
+      <a href="script.html" class="navbar-brand"><small>Script</small></a>      
+      &nbsp;
+    </div>
+  </nav>
+  <div class="container-fluid">
+    <table id="messages" class="table table-striped">
+      <thead>
+        <tr><th>#</th><th>ID</th><th>CONTENT</th><th>STAMP</th></tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-primary" onclick="javascript:showMessage(--pageno);"><<</button>
+      <button type="button" class="btn btn-primary" onclick="javascript:showMessage(++pageno);">>></button>
+    </div>
+  </div>  
+  <script src="./js/jquery-1.12.4.min.js"></script>    
+  <script src="./js/bootstrap.min.js"></script>
+  <script src="./js/ie10-viewport-bug-workaround.js"></script>
+  <script>
+  pageno = 1;  
+  function showMessage() {
+    if(pageno<1) pageno=1; 
+  	$.ajax({  
+  	    url:"/cgi-bin/select_message.py",  
+  	    type:"POST",  
+  	    contentType: "application/json", 
+  	    dataType: 'json',  
+  	    data: JSON.stringify({ "pageno": pageno}),
+        success:function(messages) {  
+          $('#messages>tbody').empty();
+          $.each(messages, function(n, message){                    
+            $('#messages>tbody').append($('<tr/>').append(
+              $('<th scope="row"/>').text((pageno-1)*10+n+1), 
+              $('<td/>').text(message.ID), 
+              $('<td/>').append(message.Content), 
+              $('<td/>').text(message.Stamp)));
+		    	});	
+        }  
+    });     
+  }  
+  window.onload = function() {
+    showMessage(pageno);
+  }
+  </script>  
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<title></title>
+		<link href="./css/bootstrap.min.css" rel="stylesheet">
+		<link href="./css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+		<link href="./css/todc-bootstrap.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="./js/html5shiv.min.js"></script>
+      <script src="./js/respond.min.js"></script>
+    <![endif]-->
+	</head>	
+<body>
+  <nav class="navbar navbar-default navbar-static-top">
+    <a class="navbar-brand">MQTT</a>
+    <div class="pull-right">
+      <a href="#" class="navbar-brand"><small></small></a>
+      &nbsp;
+    </div>
+  </nav>
+  <div class="container-fluid">
+    <div class="input-group">
+      <input type="text" class="form-control" id="poeid" placeholder="POE ID...">
+      <span class="input-group-btn">
+        <button class="btn btn-primary" type="button" onclick="javascript:showSetting();">查询</button>
+      </span>
+    </div>    
+    <br/>      
+    
+    <div class="input-group">
+      <span class="input-group-addon">输出点</span>
+      <select class="form-control" id="OutputID" >
+        <option>113101</option>
+        <option>113102</option>
+        <option>113103</option>
+        <option>113104</option>
+        <option>113105</option>
+        <option>113106</option>
+        <option>113107</option>
+        <option>113108</option>
+        </select>
+    </div>    
+    <div class="input-group">
+      <span class="input-group-addon">输出值</span>
+      <input type="text" class="form-control" id="OutputValue">
+    </div>    
+    <div class="input-group">
+      <span class="input-group-addon">输入点</span>    
+      <select class="form-control" id="InputID">
+        <option>109101</option>
+        <option>109102</option>
+      </select> 
+    </div>   
+    <div class="input-group">
+      <span class="input-group-addon">输入值</span>    
+      <input type="text" class="form-control" id="InputValue">
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon">延迟值</span>    
+      <input type="text" class="form-control" id="DelayTime">
+    </div>   
+    <button class="btn btn-primary pull-right" type="button" onclick="javascript:addSetting();">增加</button>
+    <br/>    
+    <table id="settings" class="table">
+      <thead>
+        <tr><th>输出点</th><th>输出值</th><th>输入点</th><th>输入值</th><th>延迟值</th><th>操作</th></tr>
+      </thead>    
+      <tbody>
+      </tbody>
+    </table>
+    <button type="button" class="btn btn-primary pull-right" onclick="javascript:saveSetting();">保存</button>
+  </div>  
+  <script src="./js/jquery-1.12.4.min.js"></script>    
+  <script src="./js/bootstrap.min.js"></script>
+  <script src="./js/ie10-viewport-bug-workaround.js"></script>
+  <script>    
+  i=0;  
+  function showSetting() {
+  	$.ajax({  
+  	    url:"/cgi-bin/select_mode3.py",  
+  	    type:"POST",  
+  	    contentType: "application/json", 
+  	    dataType: 'json',  
+  	    data: JSON.stringify({ "poeid": $("#poeid").val()}),
+        success:function(settings) {  
+          $('#settings>tbody').empty();
+          $.each(settings, function(n, setting){                    
+            $('#settings>tbody').append(
+              $('<tr/>').attr("idx", i).append(
+                $('<td/>').text(setting.OutputID), 
+                $('<td/>').text(setting.OutputValue), 
+                $('<td/>').text(setting.InputID), 
+                $('<td/>').text(setting.InputValue),
+                $('<td/>').text(setting.DelayTime),
+                $('<td/>').append('<button class="btn" type="button" onclick="javascript:delSetting('+i+');">删除</button>')
+              )
+            );
+            i++;
+		    	});	
+        }  
+    }); 
+  }    
+  function addSetting() {
+    $('#settings>tbody').append(
+      $('<tr/>').attr("idx", i).append(
+        $('<td/>').text($("#OutputID").val()), 
+        $('<td/>').text($("#OutputValue").val()), 
+        $('<td/>').text($("#InputID").val()), 
+        $('<td/>').text($("#InputValue").val()),  
+        $('<td/>').text($("#DelayTime").val()),
+        $('<td/>').append('<button class="btn" type="button" onclick="javascript:delSetting('+i+');">删除</button>')
+      )
+    );
+    i++;
+  }  
+  function delSetting(i) {  
+    $('#settings>tbody>tr[idx="'+i+'"]').remove();
+  }
+  
+  function saveSetting() {
+    var jsonobj = {"poeid": $("#poeid").val(), "settings":[]};
+    $.each($('#settings>tbody').children(), function(n, setting){
+      var item = { 
+                   "OutputID": $(setting).children("td").eq(0).text(), 
+                   "OutputValue": $(setting).children("td").eq(1).text(), 
+                   "InputID": $(setting).children("td").eq(2).text(), 
+                   "InputValue": $(setting).children("td").eq(3).text(), 
+                   "DelayTime": $(setting).children("td").eq(4).text()
+                 };
+      jsonobj.settings.push(item);
+    });
+  	$.ajax({  
+  	    url:"/cgi-bin/update_mode3.py",  
+  	    type:"POST",  
+  	    contentType: "application/json", 
+  	    dataType: 'json',  
+  	    data: JSON.stringify(jsonobj),
+        success:function(data) {  
+          showSetting();
+        }  
+    });
+  } 
+  </script>  
+</body>
+</html>
